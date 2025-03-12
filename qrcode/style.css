@@ -1,0 +1,87 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+
+body {
+     font-family: "Inter", sans-serif;
+     background-color: #f4f4f4;
+}
+
+.formbold-main-wrapper {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     min-height: 100vh;
+     padding: 48px;
+}
+
+.formbold-form-wrapper {
+     background-color: white;
+     border-radius: 8px;
+     padding: 40px;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+     max-width: 550px;
+     width: 100%;
+}
+
+.formbold-form-title {
+     margin-bottom: 30px;
+     text-align: center;
+}
+
+.formbold-form-title h3 {
+     color: #07074D;
+     font-weight: 700;
+     font-size: 28px;
+     line-height: 35px;
+     margin-bottom: 10px;
+}
+
+.formbold-form-input {
+     text-align: center;
+     width: 100%;
+     padding: 14px;
+     border-radius: 6px;
+     border: 1px solid #DDE3EC;
+     background-color: #FAFAFA;
+     font-size: 16px;
+     color: #536387;
+     outline: none;
+     margin-bottom: 15px;
+}
+
+.formbold-btn {
+     text-align: center;
+     width: 100%;
+     font-size: 16px;
+     border-radius: 5px;
+     padding: 14px 25px;
+     border: none;
+     font-weight: 500;
+     background-color: #6A64F1;
+     color: white;
+     cursor: pointer;
+}
+
+.formbold-btn:hover {
+     background-color: #4f46e5;
+}
+
+/* QR Code Section */
+.formbold-qr-wrapper {
+     background-color: white;
+     border-radius: 8px;
+     padding: 40px;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+     max-width: 550px;
+     width: 100%;
+     margin-top: 20px;
+     text-align: center;
+}
+
+#qrcode {
+     margin-top: 20px;
+}

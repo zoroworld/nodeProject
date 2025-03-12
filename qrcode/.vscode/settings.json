@@ -1,0 +1,9 @@
+{
+    "editor.fontSize": 14,
+    "editor.tabSize": 5,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.renderWhitespace": "selection",
+    "editor.codeLensFontSize": 14,
+    "editor.colorDecorators": false
+}

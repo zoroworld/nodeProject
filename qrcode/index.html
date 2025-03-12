@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generate Qr Code</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="formbold-main-wrapper">
+      <div class="formbold-form-wrapper">
+        <div class="formbold-form-title">
+          <h3>QR GENERATOR</h3>
+        </div>
+        <form id="qrForm">
+          <input
+            type="text"
+            name="user"
+            id="user"
+            placeholder="Enter your user name"
+            class="formbold-form-input"
+          />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email address"
+            class="formbold-form-input"
+          />
+          <button type="submit" class="formbold-btn">Generate QR Code</button>
+        </form>
+      </div>
+
+      <!-- QR Code Section -->
+      <div class="formbold-qr-wrapper" id="qrContainer">
+        <h3>Your QR Code</h3>
+        <div id="qrcodeImg"></div>
+      </div>
+    </div>
+  </body>
+<script>
+  document.getElementById('qrForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('user').value;
+    const email = document.getElementById('email').value;
+    const qrcodeImg = document.getElementById('qrcodeImg');
+
+    let qrdata = { name: name, email: email };
+
+    try {
+      const response = await fetch('http://localhost:8080/api/generate-qr', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(qrdata),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error fetching data...');
+      }
+
+      const blob = await response.blob();
+      
+      const imageUrl = URL.createObjectURL(blob);
+
+      console.log(imageUrl);
+      
+
+      qrcodeImg.innerHTML = `<img src="${imageUrl}" alt="QR Code">`;
+    } catch (error) {
+      console.error(error.message);
+    }
+  });
+</script>
+
+</html>

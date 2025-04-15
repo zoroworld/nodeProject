@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <span id="cost">3999</span>
+      <button id="pay-btn">PayFromRajorPay</button>
+    </div>
+  </body>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    function fetchThedata() {
+      const cost = document.getElementById("cost").innerText;
+      fetch("http://localhost:8000/api/v1/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: cost,
+          currency: "INR",
+          notes: {
+            name: "Razorpay",
+          },
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          // return response.json();
+          return response.json();
+        })
+        .then((data) => {
+          // console.log(data);
+          order = data;
+          // console.log(order);
+          const options = {
+            key: "rzp_test_1vsctgregergegwln8Gl0erg10202ergY",
+            amount: order.amount,
+            currency: order.currency,
+            name: "Test Payment",
+            description: "Using Razorpay",
+            order_id: order.id,
+            handler: function (response) {
+              alert("Payment Successful!");
+              console.log(response);
+            },
+            prefill: {
+              name: "Razorpay User",
+              email: "test@example.com",
+              contact: "9999999999",
+            },
+            theme: {
+              color: "#3399cc",
+            },
+          };
+
+          const rzp = new Razorpay(options);
+          rzp.open();
+        })
+        .catch((error) => {
+          console.error("There was a problem with the fetch operation:", error);
+        });
+    }
+    const payBtn = document.getElementById("pay-btn");
+    payBtn.addEventListener("click", () => {
+      fetchThedata();
+    });
+  </script>
+</html>

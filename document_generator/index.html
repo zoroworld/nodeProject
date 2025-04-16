@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="genratePdf">genratePdf</button>
+    <button id="genrateExcel">genrateExcel</button>
+    <div id="insertpdf"></div>
+  </body>
+  <script>
+    function genrate(url) {
+      let insertpdf = document.getElementById("insertpdf");
+      fetch(`http://localhost:5000/api/v1/${url}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: "abc",
+          content: "hello world",
+        }),
+      })
+        .then((res) => res.blob())
+        .then((blob) => {
+          const link = document.createElement("a");
+          link.href = window.URL.createObjectURL(blob);
+          // link.download = "abc.pdf";
+          link.innerHTML = "Download pdf";
+          link.style.display = "block";
+          link.style.margin = "10px";
+          link.style.padding = "10px";
+          link.style.backgroundColor = "blue";
+          link.style.color = "white";
+          link.style.textDecoration = "none";
+          link.style.borderRadius = "5px";
+          link.style.width = "100px";
+          link.style.textAlign = "center";
+          link.style.fontSize = "20px";
+          link.style.fontWeight = "bold";
+          link.style.cursor = "pointer";
+          link.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+          link.style.transition = "all 0.3s ease";
+          link.addEventListener("mouseover", () => {
+            link.style.backgroundColor = "darkblue";
+          });
+          link.addEventListener("mouseout", () => {
+            link.style.backgroundColor = "blue";
+          });
+          insertpdf.innerHTML = "";
+          insertpdf.appendChild(link);
+          // link.click();
+        });
+    }
+    const genratePdf = document.getElementById("genratePdf");
+    const genrateExcel = document.getElementById("genrateExcel");
+    genratePdf.addEventListener("click", () => {
+      const gpdf = "generate-pdf";
+      genrate(gpdf);
+    });
+    genrateExcel.addEventListener("click", () => {
+      const gexcel = "generate-excel";
+      genrate(gexcel);
+    });
+  </script>
+</html>

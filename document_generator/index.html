@@ -27,8 +27,12 @@
         .then((blob) => {
           const link = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);
+          if (url === "generate-pdf") {
+            link.innerText = "Download PDF";
+          } else if (url === "generate-excel") {
+            link.innerText = "Download Excel";
+          }
           // link.download = "abc.pdf";
-          link.innerHTML = "Download pdf";
           link.style.display = "block";
           link.style.margin = "10px";
           link.style.padding = "10px";
